@@ -29,9 +29,13 @@
 
 .five-day {
     border: 2px solid blue;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 #current-day {
     border: 2px solid blue;
     margin-bottom: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
