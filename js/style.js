@@ -1,3 +1,64 @@
-$( function() {
-    $( "#sortable" ).sortable();
-  } );
+// URL for the API info: https://openweathermap.org/forecast5
+
+// base URL to use for calls: https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key} (replace the curlies with the data you need)
+
+// Info on how to use OpenWeather ------------------------------------
+// lat, lon:	required	Geographical coordinates (latitude, longitude).
+
+// appid:	required	Your unique API key (you can always find it on your account page under the "API key" tab)
+
+// units:	optional	Units of measurement. standard, metric and imperial units are available. If you do not use the units parameter, standard units will be applied by default. Learn more
+
+// need to tie each city to a lat and lon
+
+// store recent searches in localstorage
+
+// GeoCoder to conver cities to lan and lon -------------------------- 
+// URL: https://openweathermap.org/api/geocoding-api
+
+
+
+var citySearchBar = document.getElementById('#city-search')
+var citySearchHistory = document.getElementById('#search-history')
+var currentDayForecast = document.getElementById('#current-day')
+
+
+// function that makes history divs sortable cards
+$(function () {
+  $("#sortable").sortable();
+});
+
+
+
+
+// search button function
+var citySearchBar = function (event) {
+  event.preventDefault();
+
+  var city = citySearchBar.ariaValueMax.trim();
+
+  if (city) {
+    getWeather(city);
+    citySearchBar.textContent = '';
+    
+  } else {
+    alert('Please choose a valid city name');
+  }
+}
+
+
+// function to put together the API URL and run the search
+var getWeather = function () {
+  var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + stateCode + "," + countryCode + "&limit=" + limit + "&appid=" + apiKey;
+
+  fetch(apiURL)
+
+    .then.(function (response) {
+      return response.json();
+    })
+
+    .then(function (data) {
+      console.log(data);
+    })
+}
+
