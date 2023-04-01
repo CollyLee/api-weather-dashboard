@@ -43,11 +43,11 @@ var citySearch = function (event) {
   var city = citySearchBar.value;
 
     var searchHistoryButton = document.createElement('div');
-    searchHistoryButton.textContent = city;
+    searchHistoryButton.textContent = "chicago";
 
     citySearchHistory.appendChild(searchHistoryButton)
 
-      // getWeather(city);
+      getWeather(city);
 
 
     citySearch.textContent = '';
@@ -62,9 +62,9 @@ var getWeather = function () {
 // -----------------------------------------------------------------------------------------------
 // function to pull the lat/long stats of the city
 
-var cityStatsAPI = "http://api.openweathermap.org/geo/1.0/direct?q=" + "chicago" + "&limit=5&appid=cf82558b772b7dffa6ddf33e4d31bd06
+var cityStatsAPI = "http://api.openweathermap.org/geo/1.0/direct?q=" + "Chicago" + "&limit=5&appid=f21a10bf49ac32a7d097c29cd473c163"
 
-fetch(cityStatsAPI);
+fetch(cityStatsAPI)
 
 .then(function (response) {
   return response.json();
@@ -73,6 +73,7 @@ fetch(cityStatsAPI);
 .then(function (data) {
   console.log(data);
 })
+}
 
 // -----------------------------------------------------------------------------------------------
 // fetch to pull weather stats using prev fetch data
