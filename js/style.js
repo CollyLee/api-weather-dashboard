@@ -13,7 +13,7 @@
 
 // store recent searches in localstorage
 
-// GeoCoder to conver cities to lan and lon -------------------------- 
+// GeoCoder to convert cities to lan and lon -------------------------- 
 // URL: https://openweathermap.org/api/geocoding-api
 
 
@@ -21,6 +21,7 @@
 var citySearchBar = document.getElementById('#city-search')
 var citySearchHistory = document.getElementById('#search-history')
 var currentDayForecast = document.getElementById('#current-day')
+var futureForecast = document.getElementById('#future-forecast')
 
 
 // function that makes history divs sortable cards
@@ -32,14 +33,14 @@ $(function () {
 
 
 // search button function
-var citySearchBar = function (event) {
+var citySearch = function (event) {
   event.preventDefault();
 
-  var city = citySearchBar.ariaValueMax.trim();
+  var city = citySearch.ariaValueMax.trim();
 
   if (city) {
     getWeather(city);
-    citySearchBar.textContent = '';
+    citySearch.textContent = '';
     
   } else {
     alert('Please choose a valid city name');
@@ -59,6 +60,9 @@ var getWeather = function () {
 
     .then(function (data) {
       console.log(data);
+
+      // need to append the date, temp, wind speed, and humidity to the six divs
     })
 }
 
+(search-history-tiles).addEventListener('click', citySearch)
