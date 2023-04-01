@@ -17,49 +17,83 @@
 // URL: https://openweathermap.org/api/geocoding-api
 
 
+// -----------------------------------------------------------------------------------------------
+// global variables
 
 var citySearchBar = document.querySelector('#city-search')
 var citySearchHistory = document.querySelector('#search-history')
 var currentDayForecast = document.querySelector('#current-day')
 var futureForecast = document.querySelector('#future-forecast')
 
-
+// -----------------------------------------------------------------------------------------------
 // function that makes history divs sortable cards
+
 $(function () {
   $("#sortable").sortable();
 });
 
+
+// -----------------------------------------------------------------------------------------------
 // search button function
+
 var citySearch = function (event) {
   event.preventDefault();
 
-  var city = citySearch.ariaValueMax.trim();
+  // how do I capture the text from the search bar???????????????????????????????????????????
+  var city = citySearchBar.value;
 
-  if (city) {
-    getWeather(city);
+    var searchHistoryButton = document.createElement('div');
+    searchHistoryButton.textContent = city;
+
+    citySearchHistory.appendChild(searchHistoryButton)
+
+      // getWeather(city);
+
+
     citySearch.textContent = '';
-    
-  } else {
-    alert('Please choose a valid city name');
-  }
+
 }
 
+// -----------------------------------------------------------------------------------------------
 // function to put together the API URL and run the search
+
 var getWeather = function () {
-  var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + stateCode + "," + countryCode + "&limit=" + limit + "&appid=" + apiKey;
 
-  fetch(apiURL)
+// -----------------------------------------------------------------------------------------------
+// function to pull the lat/long stats of the city
 
-    .then(function (response) {
-      return response.json();
-    })
+var cityStatsAPI = "http://api.openweathermap.org/geo/1.0/direct?q=" + "chicago" + "&limit=5&appid=cf82558b772b7dffa6ddf33e4d31bd06
 
-    .then(function (data) {
-      console.log(data);
+fetch(cityStatsAPI);
+
+.then(function (response) {
+  return response.json();
+})
+
+.then(function (data) {
+  console.log(data);
+})
+
+// -----------------------------------------------------------------------------------------------
+// fetch to pull weather stats using prev fetch data
+
+//   var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + stateCode + "," + countryCode + "&limit=" + limit + "&appid=" + "cf82558b772b7dffa6ddf33e4d31bd06";
+
+//   fetch(apiURL)
+
+//     .then(function (response) {
+//       return response.json();
+//     })
+
+//     .then(function (data) {
+//       console.log(data);
 
       // need to append the date, temp, wind speed, and humidity to the six divs
-    })
-}
+//     })
+// }
+
+// -----------------------------------------------------------------------------------------------
+// event listeners
 
 // (search-history-tiles).addEventListener('text', citySearch)
 citySearchBar.addEventListener('submit', citySearch)
