@@ -18,19 +18,16 @@
 
 
 
-var citySearchBar = document.getElementById('#city-search')
-var citySearchHistory = document.getElementById('#search-history')
-var currentDayForecast = document.getElementById('#current-day')
-var futureForecast = document.getElementById('#future-forecast')
+var citySearchBar = document.querySelector('#city-search')
+var citySearchHistory = document.querySelector('#search-history')
+var currentDayForecast = document.querySelector('#current-day')
+var futureForecast = document.querySelector('#future-forecast')
 
 
 // function that makes history divs sortable cards
 $(function () {
   $("#sortable").sortable();
 });
-
-
-
 
 // search button function
 var citySearch = function (event) {
@@ -47,14 +44,13 @@ var citySearch = function (event) {
   }
 }
 
-
 // function to put together the API URL and run the search
 var getWeather = function () {
   var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + stateCode + "," + countryCode + "&limit=" + limit + "&appid=" + apiKey;
 
   fetch(apiURL)
 
-    .then.(function (response) {
+    .then(function (response) {
       return response.json();
     })
 
@@ -65,4 +61,5 @@ var getWeather = function () {
     })
 }
 
-(search-history-tiles).addEventListener('click', citySearch)
+// (search-history-tiles).addEventListener('text', citySearch)
+citySearchBar.addEventListener('submit', citySearch)
