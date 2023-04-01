@@ -73,25 +73,23 @@ fetch(cityStatsAPI)
 .then(function (data) {
   console.log(data);
 })
-}
+
 
 // -----------------------------------------------------------------------------------------------
 // fetch to pull weather stats using prev fetch data
 
-//   var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + stateCode + "," + countryCode + "&limit=" + limit + "&appid=" + "cf82558b772b7dffa6ddf33e4d31bd06";
+  var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + data.name + "," + data.state + "," + data.country + "&limit=" + 5 + "&appid=f21a10bf49ac32a7d097c29cd473c163";
 
-//   fetch(apiURL)
+  fetch(apiURL)
 
-//     .then(function (response) {
-//       return response.json();
-//     })
+    .then(function (response) {
+      return response.json();
+    })
 
-//     .then(function (data) {
-//       console.log(data);
-
-      // need to append the date, temp, wind speed, and humidity to the six divs
-//     })
-// }
+    .then(function (data) {
+      console.log(data);
+    })
+}
 
 // -----------------------------------------------------------------------------------------------
 // event listeners
