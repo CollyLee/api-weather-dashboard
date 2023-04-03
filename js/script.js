@@ -15,7 +15,12 @@ var citySearchBar = document.querySelector('#city-search')
 var citySearchInput = document.querySelector('#city-search-input')
 var citySearchHistory = document.querySelector('#search-history')
 var currentDayForecast = document.querySelector('#current-day')
-var futureForecast = document.getElementsByClassName('.five-day')
+// var futureForecast = $('.five-day')
+var fiveDayOne = document.querySelector('#five-day-one')
+var fiveDayTwo = document.querySelector('#five-day-two')
+var fiveDayThree = document.querySelector('#five-day-three')
+var fiveDayFour = document.querySelector('#five-day-four')
+var fiveDayFive = document.querySelector('#five-day-five')
 
 // -----------------------------------------------------------------------------------------------
 // function that makes history divs sortable cards
@@ -48,7 +53,7 @@ var cityHistory = [];
 
 var citySearch = function (event) {
   event.preventDefault();
-  
+
   var city = citySearchInput.value;
   cityHistory.push(city);
   localStorage.setItem("city-history", JSON.stringify(cityHistory));
@@ -67,7 +72,7 @@ var citySearch = function (event) {
 // -----------------------------------------------------------------------------------------------
 // historical search button function
 
-var cityHistorySearch = function(event) {
+var cityHistorySearch = function (event) {
   event.preventDefault();
   var city = event.target.innerHTML;
   getWeather(city);
@@ -92,7 +97,7 @@ var getWeather = function (city) {
 
     .then(function (data) {
       console.log("THE CURRENT FORECAST IS:  ", data);
-      currentDayForecast.children[0].textContent = dayjs().format('ddd M/D/YYYY');
+      currentDayForecast.children[0].textContent = "Today's Date: " + dayjs().format('ddd M/D/YYYY');
       currentDayForecast.children[1].textContent = "Current Temp: " + data.main.temp + "F"
       currentDayForecast.children[2].textContent = "Current Wind Speed: " + data.wind.speed + "mph";
       currentDayForecast.children[3].textContent = "Current Humidity: " + data.main.humidity + "%";
@@ -119,10 +124,30 @@ var getWeather = function (city) {
       .then(function (forecastData) {
         console.log("THE FUTURE FORECAST IS: ", forecastData);
 
-        for (var i = 0; i < 5; i++)
-        futureForecast[i].children[1].textContent = "Testing 1";
-        futureForecast[i].children[2].textContent = "Testing 2";
-        futureForecast[i].children[3].textContent = "Testing 3";
+        fiveDayOne.children[0].textContent = dayjs.unix(forecastData.list[0].dt).format('ddd M/D/YYYY')
+        fiveDayOne.children[1].textContent = "Forecast Temp: " + forecastData.list[0].main.temp + "F"
+        fiveDayOne.children[2].textContent = "Forecast Wind Speed: " + forecastData.list[0].wind.speed + "mph";
+        fiveDayOne.children[3].textContent = "Forecast Humidity: " + forecastData.list[0].main.humidity + "%";
+
+        fiveDayTwo.children[0].textContent = dayjs.unix(forecastData.list[8].dt).format('ddd M/D/YYYY')
+        fiveDayTwo.children[1].textContent = "Forecast Temp: " + forecastData.list[8].main.temp + "F"
+        fiveDayTwo.children[2].textContent = "Forecast Wind Speed: " + forecastData.list[8].wind.speed + "mph";
+        fiveDayTwo.children[3].textContent = "Forecast Humidity: " + forecastData.list[8].main.humidity + "%";
+
+        fiveDayThree.children[0].textContent = dayjs.unix(forecastData.list[16].dt).format('ddd M/D/YYYY')
+        fiveDayThree.children[1].textContent = "Forecast Temp: " + forecastData.list[16].main.temp + "F"
+        fiveDayThree.children[2].textContent = "Forecast Wind Speed: " + forecastData.list[16].wind.speed + "mph";
+        fiveDayThree.children[3].textContent = "Forecast Humidity: " + forecastData.list[16].main.humidity + "%";
+
+        fiveDayFour.children[0].textContent = dayjs.unix(forecastData.list[24].dt).format('ddd M/D/YYYY')
+        fiveDayFour.children[1].textContent = "Forecast Temp: " + forecastData.list[24].main.temp + "F"
+        fiveDayFour.children[2].textContent = "Forecast Wind Speed: " + forecastData.list[24].wind.speed + "mph";
+        fiveDayFour.children[3].textContent = "Forecast Humidity: " + forecastData.list[24].main.humidity + "%";
+
+        fiveDayFive.children[0].textContent = dayjs.unix(forecastData.list[32].dt).format('ddd M/D/YYYY')
+        fiveDayFive.children[1].textContent = "Forecast Temp: " + forecastData.list[32].main.temp + "F"
+        fiveDayFive.children[2].textContent = "Forecast Wind Speed: " + forecastData.list[32].wind.speed + "mph";
+        fiveDayFive.children[3].textContent = "Forecast Humidity: " + forecastData.list[32].main.humidity + "%";
 
       })
 

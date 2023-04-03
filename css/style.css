@@ -40,7 +40,11 @@ main {
     background-color: beige;
 }
 
-.five-day {
+#five-day-one,
+#five-day-two,
+#five-day-three,
+#five-day-four,
+#five-day-five {
     margin-left: 5px;
     margin-right: 5px;
     background-color: beige;
