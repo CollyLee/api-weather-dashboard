@@ -27,6 +27,10 @@
     margin-bottom: 40px;
 }
 
+#search-history {
+    margin-top: 10px;
+}
+
 .five-day {
     border: 2px solid blue;
     margin-left: 5px;
@@ -38,4 +42,8 @@
     margin-bottom: 20px;
     margin-left: 5px;
     margin-right: 5px;
+}
+
+button {
+    margin: 10px
 }

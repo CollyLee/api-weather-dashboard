@@ -21,6 +21,7 @@
 // global variables
 
 var citySearchBar = document.querySelector('#city-search')
+var citySearchInput = document.querySelector('#city-search-input')
 var citySearchHistory = document.querySelector('#search-history')
 var currentDayForecast = document.querySelector('#current-day')
 var futureForecast = document.querySelector('#future-forecast')
@@ -36,22 +37,22 @@ $(function () {
 // -----------------------------------------------------------------------------------------------
 // search button function
 
+var searchHistory = [];
+
 var citySearch = function (event) {
   event.preventDefault();
 
-  // how do I capture the text from the search bar???????????????????????????????????????????
-  var city = citySearchBar.value;
+  var city = citySearchInput.value;
 
-    var searchHistoryButton = document.createElement('div');
-    searchHistoryButton.textContent = "chicago";
+  var searchHistoryButton = document.createElement('button');
 
-    citySearchHistory.appendChild(searchHistoryButton)
+  searchHistoryButton.textContent = city;
 
-      getWeather(city);
+  citySearchHistory.appendChild(searchHistoryButton)
 
+  getWeather(city);
 
-    citySearch.textContent = '';
-
+  citySearchBar.reset();
 }
 
 // -----------------------------------------------------------------------------------------------
@@ -59,26 +60,26 @@ var citySearch = function (event) {
 
 var getWeather = function () {
 
-// -----------------------------------------------------------------------------------------------
-// function to pull the lat/long stats of the city
+  // -----------------------------------------------------------------------------------------------
+  // function to pull the lat/long stats of the city
 
-var cityStatsAPI = "http://api.openweathermap.org/geo/1.0/direct?q=" + "Chicago" + "&limit=5&appid=f21a10bf49ac32a7d097c29cd473c163"
+  var cityStatsAPI = "http://api.openweathermap.org/geo/1.0/direct?q=" + "Chicago" + "&limit=5&appid=f21a10bf49ac32a7d097c29cd473c163"
 
-fetch(cityStatsAPI)
+  fetch(cityStatsAPI)
 
-.then(function (response) {
-  return response.json();
-})
+    .then(function (response) {
+      return response.json();
+    })
 
-.then(function (data) {
-  console.log(data);
-})
+    .then(function (data) {
+      console.log(data);
+    })
 
 
-// -----------------------------------------------------------------------------------------------
-// fetch to pull weather stats using prev fetch data
+  // -----------------------------------------------------------------------------------------------
+  // fetch to pull weather stats using prev fetch data
 
-  var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + data.name + "," + data.state + "," + data.country + "&limit=" + 5 + "&appid=f21a10bf49ac32a7d097c29cd473c163";
+  var apiURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + data.name + "," + data.state + "," + data.country + "&limit=" + 6 + "&appid=f21a10bf49ac32a7d097c29cd473c163";
 
   fetch(apiURL)
 
@@ -94,5 +95,5 @@ fetch(cityStatsAPI)
 // -----------------------------------------------------------------------------------------------
 // event listeners
 
-// (search-history-tiles).addEventListener('text', citySearch)
+// .addEventListener('click', citySearch)
 citySearchBar.addEventListener('submit', citySearch)
